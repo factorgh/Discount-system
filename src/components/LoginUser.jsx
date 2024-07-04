@@ -10,7 +10,7 @@ const LoginUser = ({ setUserId }) => {
   const loginUser = async () => {
     if (!name || !email) return;
     try {
-      const response = await axios.post(`${BASE_URL}api/users/login`, {
+      const response = await axios.post(`${BASE_URL}/api/users/login`, {
         name,
         email,
       });
