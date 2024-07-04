@@ -17,7 +17,7 @@ const LoginUser = ({ setUserId }) => {
       console.log(response.data._id);
       setUserId(response.data._id);
     } catch (error) {
-      console.error("Error registering user", error);
+      console.error("Error login user In", error);
     }
   };
 
