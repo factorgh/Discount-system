@@ -2,21 +2,27 @@
 import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../services/api";
+import { CircularProgress } from "@mui/material";
 
 const RegisterUser = ({ setUserId }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const registerUser = async () => {
     if (!name || !email) return;
+    setIsLoading(true);
     try {
       const response = await axios.post(`${BASE_URL}/api/users/register`, {
         name,
         email,
       });
+
       console.log(response.data._id);
       setUserId(response.data._id);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.error("Error registering user", error);
     }
   };
@@ -44,7 +50,7 @@ const RegisterUser = ({ setUserId }) => {
           className="w-[100px] h-[50px] bg-orange-300 text-white rounded-full"
           onClick={registerUser}
         >
-          Register
+          {isLoading ? <CircularProgress /> : "register"}
         </button>
       </div>
     </div>
